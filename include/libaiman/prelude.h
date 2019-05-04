@@ -6,6 +6,9 @@
 #include <stdnoreturn.h>
 #include <stdalign.h>
 
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
 // lets you know if a pointer is owning (need to free/destroy).
 // only for documentation purposes
 #define owning
@@ -30,6 +33,16 @@ typedef struct {
 inline bool string_eq(string a, string b)
 {
     return a.len == b.len && memcmp(a.ptr, b.ptr, a.len) == 0;
+}
+
+inline int string_cmp(string a, string b)
+{
+    int c = strncmp(a.ptr, b.ptr, MIN(a.len, b.len));
+    if (c == 0) {
+        return (int)(a.len - b.len);
+    } else {
+        return c;
+    }
 }
 
 inline string string_slice(string a, size_t start, size_t end)
