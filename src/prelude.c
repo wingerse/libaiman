@@ -5,6 +5,7 @@
 
 extern inline bool string_eq(string a, string b);
 extern inline string string_slice(string a, size_t start, size_t end);
+extern inline int string_cmp(string a, string b);
 
 noreturn void _panic(const char *file, int line, const char *f, ...)
 {
